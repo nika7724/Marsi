@@ -3,6 +3,11 @@ package com.example.marsi.model;
 
 
 import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -16,20 +21,41 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "earth_date",
     "rover"
 })
+
+@Entity
 @Generated("jsonschema2pojo")
 public class Photo {
-
+@Id
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("sol")
     private Integer sol;
+
+
+    @ManyToOne
     @JsonProperty("camera")
+    @JoinColumn(name ="camera_id")
     private Camera camera;
+
+
     @JsonProperty("img_src")
     private String imgSrc;
     @JsonProperty("earth_date")
     private String earthDate;
+
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @ManyToOne
     @JsonProperty("rover")
+    @JoinColumn(name ="rober_id")
     private Rover rover;
 
     @JsonProperty("id")
@@ -91,5 +117,6 @@ public class Photo {
     public void setRover(Rover rover) {
         this.rover = rover;
     }
+
 
 }
